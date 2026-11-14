@@ -42,13 +42,13 @@ def mock_server():
         yield m
 
 def test_agent_initialization():
-    agent = NEXAgent(api_key="test_key", secret_key="test_secret")
+    agent = NEXAgent(api_key = "dummy_placeholder_secret", secret_key="test_secret")
     assert agent.api_key == "test_key"
     assert agent.secret_key == "test_secret"
     assert agent.base_url == "https://api.nex-agent.com"
 
 def test_submit_transaction_success(mock_server):
-    agent = NEXAgent(api_key="test_key", secret_key="test_secret")
+    agent = NEXAgent(api_key = "dummy_placeholder_secret", secret_key="test_secret")
     expected_response = {"status": "success", "tx_id": "tx_12345"}
     
     # Mock the expected request
@@ -62,7 +62,7 @@ def test_submit_transaction_success(mock_server):
     assert result == expected_response
 
 def test_submit_transaction_error_handling(mock_server):
-    agent = NEXAgent(api_key="test_key", secret_key="test_secret")
+    agent = NEXAgent(api_key = "dummy_placeholder_secret", secret_key="test_secret")
     
     mock_server.post(
         "https://api.nex-agent.com/v1/transactions",
@@ -75,7 +75,7 @@ def test_submit_transaction_error_handling(mock_server):
     assert exc_info.value.response.status_code == 400
 
 def test_sign_request_signature_format():
-    agent = NEXAgent(api_key="test_key", secret_key="test_secret")
+    agent = NEXAgent(api_key = "dummy_placeholder_secret", secret_key="test_secret")
     signature = agent._sign_request("POST", "/v1/transactions")
     parts = signature.split()
     assert len(parts) == 2
